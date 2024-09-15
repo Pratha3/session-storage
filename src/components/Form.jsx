@@ -9,8 +9,10 @@ function Form() {
   useEffect(() => {
     let oldList = JSON.parse(sessionStorage.getItem("studentList")) || [];
     setList(oldList);
-  }, [setList]);
-
+    return () => {
+      sessionStorage.clear();
+    };
+  }, []);
   let handleInput = (e) => {
     let { name, value } = e.target;
     setStudent({ ...student, [name]: value });
